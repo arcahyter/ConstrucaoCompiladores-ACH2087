@@ -4,7 +4,7 @@
  * Baseado na "Especificação Textual do Compilador COBOL", seção 2.
  *
  * Compilar:  gcc -Wall -Wextra -o cobol_lexer cobol_lexer.c
- * Usar:      ./cobol_lexer [-d] programa.cob
+ * Usar:      ./cobol_lexer [-d] exemplo.cob ou qualquer arquivo COBOL
  *              -d  inclui linhas de depuração (indicador 'D' na coluna 7)
  *
  * Para usar como biblioteca (com seu parser), compile com -DLEXER_NO_MAIN
@@ -17,7 +17,7 @@
 #include <stdarg.h>
 
 /* ------------------------------------------------------------------ */
-/* Tipos                                                               */
+/* Tipos de tokens                                                    */
 /* ------------------------------------------------------------------ */
 typedef enum {
     TK_EOF, TK_KEYWORD, TK_IDENT, TK_NUMBER, TK_STRING, TK_PICTURE,
@@ -36,6 +36,7 @@ typedef struct {
 /* Severidades da seção 6 da especificação */
 typedef enum { SEV_I, SEV_W, SEV_E, SEV_S } Severity;
 
+/* Estrutura do analisador léxico que identifica tokens */
 typedef struct {
     const char *filename;
     char *src;          /* texto "lógico": só colunas 8-72, já com continuações */
@@ -48,7 +49,7 @@ typedef struct {
 } Lexer;
 
 /* ------------------------------------------------------------------ */
-/* Palavras reservadas                                                 */
+/* Palavras reservadas, adicionar ou alterar conforme preferir        */
 /* ------------------------------------------------------------------ */
 static const char *KEYWORDS[] = {
     "IDENTIFICATION", "ENVIRONMENT", "DATA", "PROCEDURE", "DIVISION",
@@ -386,6 +387,8 @@ int lexer_next(Lexer *lx, Token *t) {
     }
 
     /* ---- Número com sinal ou iniciado por ponto ------------------- */
+    /* Se o token anterior não é um operando, então +, - ou . podem iniciar
+       um literal numérico. O ponto só é aceito se seguido de dígito. */
     if ((c == '+' || c == '-' || c == '.') && !prev_is_operand(lx)) {
         int n1 = peekc(lx, 1), n2 = peekc(lx, 2);
         int starts_num;
