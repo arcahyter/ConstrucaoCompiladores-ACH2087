@@ -74,6 +74,8 @@ Esses arquivos permitem verificar se o analisador reconhece corretamente os toke
 | Nome | NUSP |
 |---|---|
 | Jonatan | 15510806 |
+| Gabriel Chen Hirata | 13747946 |
+| Thomas Delfs | 13837175 |
 
 **Disciplina:** ACH2087 — Construção de Compiladores  
 **Instituição:** Universidade de São Paulo (USP)  
