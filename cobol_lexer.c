@@ -168,7 +168,7 @@ static void load_source(Lexer *lx, FILE *f) {
         }
 
         char ind = line[6];
-        if (ind == '*' || ind == '/') continue;                       /* comentário */
+        if (ind == '*' || ind == '/') continue;                      
         if ((ind == 'D' || ind == 'd') && !lx->include_debug) continue; /* depuração */
 
         int cont = (ind == '-');
