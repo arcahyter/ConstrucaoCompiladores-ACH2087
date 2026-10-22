@@ -63,7 +63,7 @@ Também é possível executar os demais arquivos `.cob` presentes no repositóri
 
 ## Testes
 
-Foram criados arquivos de teste para verificar o comportamento do analisador em diferentes situações, incluindo códigos válidos e casos com erros léxicos.
+Foram aproveitados arquivos de teste para verificar o comportamento do analisador em diferentes situações, incluindo códigos válidos e casos com erros léxicos.
 
 Os testes incluem caracteres inválidos, identificadores fora do padrão, literais não terminados e problemas relacionados ao formato do código COBOL.
 
